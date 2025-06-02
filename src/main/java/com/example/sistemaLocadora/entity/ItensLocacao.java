@@ -1,13 +1,13 @@
 package com.example.sistemaLocadora.entity;
 
-import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,19 +20,20 @@ public class ItensLocacao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToMany(mappedBy = "locacao")
-	private List<Locacao> locacao;
+	@ManyToOne
+	@JoinColumn(name = "locacao_id")
+	private Locacao locacao;
 	
-	@OneToMany(mappedBy = "filme" )
-	private List<Filme> filme;
+	@ManyToOne
+	@JoinColumn(name = "filme_id")
+	private Filme filme;
 	
 	private Double valor;
-
 	public ItensLocacao() {
 		
 	}
 
-	public ItensLocacao(Long id, List<Locacao> locacao, List<Filme> filme, Double valor) {
+	public ItensLocacao(Long id, Locacao locacao, Filme filme, Double valor) {
 		
 		this.id = id;
 		this.locacao = locacao;
@@ -48,19 +49,19 @@ public class ItensLocacao {
 		this.id = id;
 	}
 
-	public List<Locacao> getLocacao() {
+	public Locacao getLocacao() {
 		return locacao;
 	}
 
-	public void setLocacao(List<Locacao> locacao) {
+	public void setLocacao(Locacao locacao) {
 		this.locacao = locacao;
 	}
 
-	public List<Filme> getFilme() {
+	public Filme getFilme() {
 		return filme;
 	}
 
-	public void setFilme(List<Filme> filme) {
+	public void setFilme(Filme filme) {
 		this.filme = filme;
 	}
 

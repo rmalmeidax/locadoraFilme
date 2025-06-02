@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,17 +20,16 @@ public class Locacao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToMany(mappedBy = "cliente")
-	private List<Cliente> cliente;
-	
 	private LocalDate dt_locacao;
 	private LocalDate dt_dev_prevista;
 	private LocalDate dt_dev_real;
 	private String situacao;
 	
+	
 	@ManyToOne
-	@JoinColumn(name = "locacao_id")
-	private Locacao locacao;
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "filme_id")
@@ -42,7 +40,7 @@ public class Locacao {
 		
 	}
 
-	public Locacao(Long id, List<Cliente> cliente, LocalDate dt_locacao, LocalDate dt_dev_prevista,
+	public Locacao(Long id, Cliente cliente, LocalDate dt_locacao, LocalDate dt_dev_prevista,
 			LocalDate dt_dev_real, String situacao, Locacao locacao, Filme filme) {
 		this.id = id;
 		this.cliente = cliente;
@@ -50,7 +48,6 @@ public class Locacao {
 		this.dt_dev_prevista = dt_dev_prevista;
 		this.dt_dev_real = dt_dev_real;
 		this.situacao = situacao;
-		this.locacao = locacao;
 		this.filme = filme;
 	}
 	public Long getId() {
@@ -61,11 +58,11 @@ public class Locacao {
 		this.id = id;
 	}
 
-	public List<Cliente> getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(List<Cliente> cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
@@ -99,14 +96,6 @@ public class Locacao {
 
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
-	}
-
-	public Locacao getLocacao() {
-		return locacao;
-	}
-
-	public void setLocacao(Locacao locacao) {
-		this.locacao = locacao;
 	}
 
 	public Filme getFilme() {

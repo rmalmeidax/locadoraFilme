@@ -2,6 +2,7 @@ package com.example.sistemaLocadora.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.sistemaLocadora.entity.Filme;
@@ -11,6 +12,7 @@ import com.example.sistemaLocadora.repository.FilmeRepository;
 
 public class FilmeService {
 
+	@Autowired
 	private FilmeRepository filmeRepository;
 
 	// listar 
