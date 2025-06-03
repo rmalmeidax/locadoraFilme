@@ -1,6 +1,7 @@
 package com.example.sistemaLocadora.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,12 +34,26 @@ public class ItensLocacaoService {
 		public void deletarId(Long  id) {
 			itensLocacaoRepository.deleteById(id);
 		}
-		
-		
-		
-		
-		
+	//atualizar
+		public ItensLocacao atualizar (Long id, ItensLocacao upItensLocacao) {
+			Optional<ItensLocacao> itensLocacaoExistente = itensLocacaoRepository.findById(id);
+			
+		if (itensLocacaoExistente.isPresent()) {
+			ItensLocacao itensLocacao = itensLocacaoExistente.get();
+			itensLocacao.setFilme(upItensLocacao.getFilme());
+			itensLocacao.setLocacao(upItensLocacao.getLocacao());
+			itensLocacao.setValor(upItensLocacao.getValor());
+			return itensLocacaoRepository.save(itensLocacao);
+		}
+		else {
+			throw new RuntimeException("Error ao atualizar." + id);
+			
+		}
+			
+			
+			
+			
+	}
+			
 	
-	
-
 }

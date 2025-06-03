@@ -1,6 +1,7 @@
 package com.example.sistemaLocadora.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,8 +37,27 @@ public class FilmeService {
 		filmeRepository.deleteById(id);
 	}
 	
-	
-	
-	
+	//atualizar 
+	public Filme atualizar (Long id, Filme upFilme) {
+		Optional<Filme> filmeExistente = filmeRepository.findById(id);
+		
+		if (filmeExistente.isPresent()) {
+			Filme filme = filmeExistente.get();
+			filme.setAnolancamento(upFilme.getAnolancamento());
+			filme.setClassificacao(upFilme.getClassificacao());
+			filme.setDisponivel(upFilme.getDisponivel());
+			filme.setGenero(upFilme.getGenero());
+			filme.setTitulo(upFilme.getTitulo());
+			return filmeRepository.save(filme);
+		}
+		else {
+			throw new RuntimeException("Error filme não atualizado." + id);
+		}
+			
+			
+			
+		}
+		
+		
+	}
 
-}

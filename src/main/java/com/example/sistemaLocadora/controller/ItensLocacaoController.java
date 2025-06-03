@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,12 +51,14 @@ public class ItensLocacaoController {
 	public ResponseEntity<ItensLocacao> deletarId(@PathVariable Long id){
 		itensLocacaoService.deletarId(id);
 		return ResponseEntity.noContent().build()	;	
-		
-		
-		
-		
 	}
 	
+	//atualizar
+	@PutMapping("/{id}")
+	public ItensLocacao atualizar (@PathVariable Long id,
+			@RequestBody ItensLocacao itensLocacao) {
+		return itensLocacaoService.atualizar(id, itensLocacao);
+	}
 	
 	
 	
